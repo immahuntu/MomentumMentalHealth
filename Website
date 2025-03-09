@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Momentum Mental Health</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header class="landing">
+        <h1>Momentum Mental Health</h1>
+        <p>A holistic approach to mental health and wellbeing.</p>
+        <a href="#services" class="scroll-btn">Explore Services</a>
+    </header>
+    
+    <section id="services" class="animated-section">
+        <h2>Our Services</h2>
+        <p>Momentum is a non-profit organisation dedicated to transforming the mental health and well-being of the community.</p>
+        <p>We offer services such as cooking, gardening, yoga sessions, for the local community across Dalby, Warwick, Toowoomba, Kingaroy, and Chinchilla.</p>
+        <p>With strategic partnerships such as those with Mindware Psychology, we also provide free psychological therapy sessions.</p>
+        <h3>Our Vision</h3>
+        <p>Mental Health & Well-Being for Everyone, Every Single Day.</p>
+        <h3>Our Purpose</h3>
+        <p>To Transform Mental Health & Well-Being for Our Community.</p>
+    </section>
+    
+    <section id="locations" class="animated-section">
+        <h2>Our Locations</h2>
+        <div class="location-list">
+            <div class="location-item">Toowoomba</div>
+            <div class="location-item">Dalby</div>
+            <div class="location-item">Warwick</div>
+            <div class="location-item">Kingaroy</div>
+            <div class="location-item">Chinchilla</div>
+        </div>
+    </section>
+</body>
+</html>
