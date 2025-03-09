@@ -6,6 +6,61 @@
     <title>Momentum Mental Health</title>
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #a8e6cf, #dcedc1);
+            text-align: center;
+        }
+        .landing {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #fff;
+            background: url('header-bg.jpg') no-repeat center center/cover;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        .scroll-btn {
+            padding: 10px 20px;
+            margin-top: 20px;
+            background: #ff8b94;
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background 0.3s;
+        }
+        .scroll-btn:hover {
+            background: #ff6b6b;
+        }
+        .animated-section {
+            padding: 50px 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 50px auto;
+            max-width: 800px;
+        }
+        .service-list, .location-list {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .service-item, .location-item {
+            background: #ffcc5c;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+        .service-item:hover, .location-item:hover {
+            transform: scale(1.1);
+        }
+    </style>
 </head>
 <body>
     <header class="landing">
