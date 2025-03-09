@@ -7,12 +7,15 @@
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Quicksand:wght@300;500&display=swap');
+        
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Playfair Display', serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(to bottom, #a8e6cf, #dcedc1);
+            background: linear-gradient(to bottom, #56B7E8, #D5A300);
             text-align: center;
+            color: #333;
         }
         .landing {
             display: flex;
@@ -23,42 +26,121 @@
             color: #fff;
             background: url('header-bg.jpg') no-repeat center center/cover;
             text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            font-family: 'Quicksand', sans-serif;
         }
         .scroll-btn {
-            padding: 10px 20px;
+            padding: 12px 25px;
             margin-top: 20px;
-            background: #ff8b94;
+            background: #140043;
             color: white;
             text-decoration: none;
-            border-radius: 20px;
-            transition: background 0.3s;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: 500;
+            transition: background 0.3s, transform 0.3s;
         }
         .scroll-btn:hover {
-            background: #ff6b6b;
+            background: #D5A300;
+            transform: scale(1.05);
         }
         .animated-section {
             padding: 50px 20px;
             background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             margin: 50px auto;
             max-width: 800px;
+            font-family: 'Quicksand', sans-serif;
         }
-        .service-list, .location-list {
+        .testimonial-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 50px;
+            position: relative;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 150px; /* Adjust the height as needed */
+        }
+        .testimonial {
+            display: none;
+            font-size: 20px;
+            font-style: italic;
+            color: #555;
+            text-align: center;
+        }
+        .testimonial.active {
+            display: block;
+        }
+        .testimonial-btn {
+            background: none;
+            border: none;
+            font-size: 30px;
+            cursor: pointer;
+            color: #140043;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .testimonial-btn.left {
+            left: -40px;
+        }
+        .testimonial-btn.right {
+            right: -40px;
+        }
+        .location-section {
+            padding: 50px 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            margin: 50px auto;
+            max-width: 800px;
+            font-family: 'Quicksand', sans-serif;
+        }
+        .location-buttons {
             display: flex;
             justify-content: center;
-            gap: 15px;
             flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
         }
-        .service-item, .location-item {
-            background: #ffcc5c;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s;
+        .location-button {
+            padding: 10px 20px;
+            background: #140043;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-family: 'Quicksand', sans-serif;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
         }
-        .service-item:hover, .location-item:hover {
-            transform: scale(1.1);
+        .location-button:hover {
+            background: #D5A300;
+            transform: scale(1.05);
+        }
+        .location-button.active {
+            background: #D5A300;
+            transform: scale(1.05);
+        }
+        .location-info {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .map {
+            width: 100%;
+            height: 300px;
+            background: #e0e0e0;
+            margin-top: 20px;
+        }
+        .contact-info {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #555;
+        }
+        .contact-info p {
+            margin: 5px 0;
         }
     </style>
 </head>
@@ -74,21 +156,110 @@
         <p>Momentum is a non-profit organisation dedicated to transforming the mental health and well-being of the community.</p>
         <p>We offer services such as cooking, gardening, yoga sessions, for the local community across Dalby, Warwick, Toowoomba, Kingaroy, and Chinchilla.</p>
         <p>With strategic partnerships such as those with Mindware Psychology, we also provide free psychological therapy sessions.</p>
-        <h3>Our Vision</h3>
-        <p>Mental Health & Well-Being for Everyone, Every Single Day.</p>
-        <h3>Our Purpose</h3>
-        <p>To Transform Mental Health & Well-Being for Our Community.</p>
     </section>
     
-    <section id="locations" class="animated-section">
-        <h2>Our Locations</h2>
-        <div class="location-list">
-            <div class="location-item">Toowoomba</div>
-            <div class="location-item">Dalby</div>
-            <div class="location-item">Warwick</div>
-            <div class="location-item">Kingaroy</div>
-            <div class="location-item">Chinchilla</div>
+    <section class="location-section">
+        <h2>Select Location</h2>
+        <div class="location-buttons">
+            <button class="location-button" onclick="updateLocationInfo('toowoomba')">Toowoomba</button>
+            <button class="location-button" onclick="updateLocationInfo('chinchilla')">Chinchilla and Miles</button>
+            <button class="location-button" onclick="updateLocationInfo('warwick')">Warwick</button>
+            <button class="location-button" onclick="updateLocationInfo('dalby')">Dalby</button>
+            <button class="location-button" onclick="updateLocationInfo('kingaroy')">Kingaroy</button>
         </div>
+        <div id="location-info" class="location-info"></div>
+        <div id="map" class="map"></div>
     </section>
+
+    <section class="testimonial-container">
+        <button class="testimonial-btn left" onclick="prevTestimonial()">&#10094;</button>
+        <p class="testimonial active">"They are a business that actually seem to want to help. This is not as common as you would think, or should expect"</p>
+        <p class="testimonial">"The fact that I am heard, given time to process issues, given relevant referrals"</p>
+        <p class="testimonial">"The caring people"</p>
+        <p class="testimonial">"Momentum provides a stable social base that I can work from"</p>
+        <p class="testimonial">"Meeting people, learning to socialise again, learning new things, being challenged and learning in art journalling/storytelling, 1:1 coaching"</p>
+        <p class="testimonial">"Great support when you don’t know where to turn"</p>
+        <p class="testimonial">"Friendly and welcoming atmosphere"</p>
+        <p class="testimonial">"Easy to work with and very helpful"</p>
+        <button class="testimonial-btn right" onclick="nextTestimonial()">&#10095;</button>
+    </section>
+
+    <script>
+        const locationData = {
+            toowoomba: {
+                info: "Momentum in Toowoomba has seven Wellbeing Coaches providing individual and group sessions in person and on-line. There are approximately 200 individuals attending over 550 times each month in Toowoomba!",
+                map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.839434509374!2d151.9537353153168!3d-27.55982197975171!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b965c5e1f1f1f1f%3A0x6b965c5e1f1f1f1f!2s112%20Russell%20St%2C%20Toowoomba%20City%20QLD%204350%2C%20Australia!5e0!3m2!1sen!2sau!4v1613972622000!5m2!1sen!2sau",
+                contact: {
+                    hours: "Monday – Friday, 9am – 4pm",
+                    address: "112 Russell Street, Toowoomba 4350 Queensland",
+                    phone: "(07) 4632 4688",
+                    email: "Admin@momentummentalhealth.com.au"
+                }
+            },
+            chinchilla: {
+                info: "Momentum has a main site in Chinchilla where two Wellbeing Coaches (Davida and Jake) provide 1:1 coaching sessions. There are approximately 40 individuals attending over 70 attendees each month.",
+                map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509374!2d150.6267353153168!3d-26.73982197975171!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b965c5e1f1f1f1f%3A0x6b965c5e1f1f1f1f!2s67%2F71%20Middle%20St%2C%20Chinchilla%20QLD%204413%2C%20Australia!5e0!3m2!1sen!2sau!4v1613972622000!5m2!1sen!2sau",
+                contact: {
+                    hours: "Monday – Friday 8am – 4pm",
+                    address: "67/71 Middle Street, Chinchilla 4413 Queensland",
+                    phone: "(0428) 102 271",
+                    email: "davida@momentummentalhealth.com.au"
+                }
+            },
+            warwick: {
+                info: "Momentum has services in Warwick two days a week. These are delivered by Wellbeing Coach Coby, and local Warwick resident Cynthia. They provide group-based sessions on the Wednesday and Friday (10-2pm). Individual sessions are also available on-line or in person.",
+                map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509374!2d151.9537353153168!3d-28.21982197975171!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b965c5e1f1f1f1f%3A0x6b965c5e1f1f1f1f!2s163%20Palmerin%20St%2C%20Warwick%20QLD%204370%2C%20Australia!5e0!3m2!1sen!2sau!4v1613972622000!5m2!1sen!2sau",
+                contact: {
+                    hours: "Wednesday and Fridays 10am – 2pm",
+                    address: "SDEIA 163 Palmerin Street Warwick 4688 Queensland",
+                    phone: "(07) 4632 4688",
+                    email: "Admin@momentummentalhealth.com.au"
+                }
+            },
+            dalby: {
+                info: "Momentum provides the group-based peer recovery support program (GBPRSP) in Dalby on a Thursday.",
+                map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509374!2d151.9537353153168!3d-27.18982197975171!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b965c5e1f1f1f1f%3A0x6b965c5e1f1f1f1f!2sDalby%2C%20QLD%204407%2C%20Australia!5e0!3m2!1sen!2sau!4v1613972622000!5m2!1sen!2sau",
+                contact: {
+                    hours: "Thursday 9am – 4pm",
+                    address: "Dalby, Queensland",
+                    phone: "(07) 4632 4688",
+                    email: "Admin@momentummentalhealth.com.au"
+                }
+            },
+            kingaroy: {
+                info: "Momentum provides the group-based peer recovery support program (GBPRSP) in Kingaroy on a Tuesday.",
+                map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509374!2d151.9537353153168!3d-26.53982197975171!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b965c5e1f1f1f1f%3A0x6b965c5e1f1f1f1f!2sKingaroy%2C%20QLD%204610%2C%20Australia!5e0!3m2!1sen!2sau!4v1613972622000!5m2!1sen!2sau",
+                contact: {
+                    hours: "Tuesday 9am – 4pm",
+                    address: "Kingaroy, Queensland",
+                    phone: "(07) 4632 4688",
+                    email: "Admin@momentummentalhealth.com.au"
+                }
+            }
+        };
+
+        function updateLocationInfo(location) {
+            const locationButtons = document.querySelectorAll('.location-button');
+            locationButtons.forEach(button => button.classList.remove('active'));
+            document.querySelector(`.location-button[onclick="updateLocationInfo('${location}')"]`).classList.add('active');
+
+            const locationInfo = document.getElementById('location-info');
+            const map = document.getElementById('map');
+            const { info, map: mapUrl, contact } = locationData[location];
+
+            locationInfo.innerHTML = `
+                <p>${info}</p>
+                <div class="contact-info">
+                    <p><strong>Trading Hours:</strong> ${contact.hours}</p>
+                    <p><strong>Address:</strong> ${contact.address}</p>
+                    <p><strong>Phone:</strong> ${contact.phone}</p>
+                    <p><strong>Email:</strong> <a href="mailto:${contact.email}">${contact.email}</a></p>
+                </div>
+            `;
+            map.innerHTML = `<iframe src="${mapUrl}" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>`;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => updateLocationInfo('toowoomba'));
+    </script>
 </body>
 </html>
